@@ -1,8 +1,6 @@
 from flask import Flask, Response, render_template, request, jsonify
 import cv2
 import numpy as np
-import threading
-import time
 import imageio
 from queue import Queue
 import os  # Importe a biblioteca os para manipulação de arquivos e diretórios
