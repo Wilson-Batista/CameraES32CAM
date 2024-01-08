@@ -5,7 +5,6 @@ CameraIP
 ```
 pip install Flask
 ```
-<<<<<<< HEAD
 2. OpenCV (cv2): Uma biblioteca de visão computacional em código aberto que possibilita capturar, processar e analisar video em tempo real.
 ```
 =======
