@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmissão e Gravação de Vídeo</title>
+</head>
+<body>
+    <h1 style="color: blue; font-family: Arial, Helvetica, sans-serif;">Transmissão e Gravação de Vídeo</h1>
+    <img id="video_feed" src="" alt="Video Feed">
+
+    <hr>
+    <button onclick="iniciaGravacao()">Iniciar Gravação</button>
+    <button onclick="paraGravacao()">Parar Gravação</button>
+    <button onclick="baixarGravacao()">Baixar Gravação</button>
+
+    <div id="status"></div>
+
+    <script>
+        let gravacao = false;
+
+        function iniciaGravacao() {
+            // Iniciar a gravação no lado do servidor
+            fetch('/start_recording', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+                    gravacao = true;
+                });
+        }
+
+        function paraGravacao() {
+            // Parar a gravação no lado do servidor
+            fetch('/stop_recording', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+                    gravacao = false;
+                });
+        }
+
+        function baixarGravacao() {
+            // Baixar a gravação no lado do servidor
+            fetch('/download_recording')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+
+                    // Se a gravação foi bem-sucedida, abrir o link de download
+                    if (data.status === 'Recording downloaded') {
+                        const link = document.createElement('a');
+                        link.href = '/static/recording.mp4';  // Assumindo que o arquivo é salvo na pasta "static"
+                        link.download = 'recording.mp4';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                });
+        }
+
+        // Função para iniciar a exibição do vídeo em tempo real
+        function startVideo() {
+            document.getElementById('video_feed').src = '/video_feed';
+        }
+
+        // Chamar a função de início de vídeo quando a página carregar
+        window.onload = startVideo;
+    </script>
+</body>
+</html>
