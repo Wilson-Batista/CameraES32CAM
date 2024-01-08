@@ -7,9 +7,6 @@ pip install Flask
 ```
 2. OpenCV (cv2): Uma biblioteca de visão computacional em código aberto que possibilita capturar, processar e analisar video em tempo real.
 ```
-=======
-```OpenCV (cv2): Uma biblioteca de visão computacional em código aberto
->>>>>>> parent of f537dfc (Update README.md)
 pip install opencv-python
 ```
 3. NumPy: Uma biblioteca que possibilita a realização de operaçoes matematicas em arrays multidimensionais, utilizado para converter os bytes dos flames em um array do tipo de 8 bits.
